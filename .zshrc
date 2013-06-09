@@ -6,19 +6,19 @@
 ###############################################
 ## colors                                     #
 ###############################################
-local GRAY=$"%{\e[1;30m%}"
-local LIGHT_GRAY=$"%{\e[0;37m%}"
-local WHITE=$"%{\e[1;37m%}"
-local LIGHT_BLUE=$"%{\e[1;36m%}"
-local YELLOW=$"%{\e[1;33m%}"
-local PURPLE=$"%{\e[1;35m%}"
-local GREEN=$"%{\e[1;32m%}"
-local BLUE=$"%{\e[1;34m%}"
-local RED=$"%{\e[1;31m%}"
-local DEFAULT=$"%{\e[[%}"
+local GRAY=$'%{\e[1;30m%}'
+local LIGHT_GRAY=$'%{\e[0;37m%}'
+local WHITE=$'%{\e[1;37m%}'
+local LIGHT_BLUE=$'%{\e[1;36m%}'
+local YELLOW=$'%{\e[1;33m%}'
+local PURPLE=$'%{\e[1;35m%}'
+local GREEN=$'%{\e[1;32m%}'
+local BLUE=$'%{\e[1;34m%}'
+local RED=$'%{\e[1;31m%}'
+local DEFAULT=$'%{\e[[%}'
 
 ###############################################
-## プロンプトのカラー表示を有効               #
+## enable to display prompt with color        #
 ###############################################
 autoload -U colors
 colors
@@ -35,14 +35,13 @@ case ${UID} in
 	   tmp_rprompt="%B%U${tmp_rprompt}%u%b"
         ;;
 esac
-
 PROMPT=$tmp_prompt    # 通常のプロンプト
 PROMPT2=$tmp_prompt2  # セカンダリのプロンプト(コマンドが2行以上の時に表示される)
 SPROMPT=$tmp_sprompt  # スペル訂正用プロンプト
 RPROMPT=$tmp_rprompt  # 右側のプロンプト
 
 ###############################################
-## 補完機能の強化                             #
+## completion                                 #
 ###############################################
 autoload -U compinit
 compinit
@@ -181,7 +180,7 @@ zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"                 # 補完時�
 zstyle ":completion:*:*files" ignored-patterns "*?.o"               # オブジェクトファイルとか中間ファイルとかはfileとして補完させない
 zstyle ":completion:*" list-separator "-->"                         # セパレータを設定する
 zstyle ":completion:*:*:-subscript-:*" tag-order indexes parameters # 変数の添字を補完する
-#補完関数の表示を過剰にする
+# 補完関数の表示を過剰にする
 zstyle ":completion:*" verbose yes 
 zstyle ":completion:*" completer _expand _complete _match _prefix _approximate _list _history 
 zstyle ":completion:*:messages" format $YELLOW"%d"$DEFAULT
@@ -195,7 +194,7 @@ zstyle ":completion:*" group-name ""
 zstyle ":completion:*" use-cache true # apt-getとかdpkgコマンドをキャッシュを使って速くする
 
 ###############################################
-## 引数の検索ワードで google 検索 (日本語可)  #
+## google search (Japanese is available)      #
 ###############################################
 function google() {
   local str opt
