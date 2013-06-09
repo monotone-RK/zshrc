@@ -86,7 +86,7 @@ zstyle ":completion:*" group-name ""
 zstyle ":completion:*" use-cache true # apt-getとかdpkgコマンドをキャッシュを使って速くする
 
 ###############################################
-##  command's history function                #
+## command's history function                 #
 ###############################################
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -143,7 +143,7 @@ case ${OSTYPE} in
 esac
 
 ###############################################
-##  screen                                    #
+## screen                                     #
 ###############################################
 if [ ${TERM} = xterm-color ]; then # status bar
 preexec () {
