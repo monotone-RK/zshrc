@@ -64,6 +64,42 @@ setopt no_beep             # ビープ音を鳴らさないようにする
 bindkey "^I" menu-complete # 展開する前に補完候補を出させる(Ctrl-iで補完するようにする)
 
 ###############################################
+# zstyle                                      #
+###############################################
+zstyle ":completion:*" list-colors "di=34" "ln=35" "so=32" "ex=31" "bd=46;34" "cd=43;34"
+zstyle ":completion:*:default" menu select=1                        # 補完候補をカーソルで選択できる
+zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"                 # 補完時に大文字小文字を区別しない
+zstyle ":completion:*:*files" ignored-patterns "*?.o"               # オブジェクトファイルとか中間ファイルとかはfileとして補完させない
+zstyle ":completion:*" list-separator "-->"                         # セパレータを設定する
+zstyle ":completion:*:*:-subscript-:*" tag-order indexes parameters # 変数の添字を補完する
+# 補完関数の表示を過剰にする
+zstyle ":completion:*" verbose yes 
+zstyle ":completion:*" completer _expand _complete _match _prefix _approximate _list _history 
+zstyle ":completion:*:messages" format $YELLOW"%d"$DEFAULT
+zstyle ":completion:*:warnings" format $RED"No matches for:"$YELLOW" %d"$DEFAULT
+zstyle ":completion:*:descriptions" format $YELLOW"completing %B%d%b"$DEFAULT
+zstyle ":completion:*:corrections" format $YELLOW"%B%d "$RED"(errors: %e)%b"$DEFAULT
+zstyle ":completion:*:options" description "yes"
+# グループ名に空文字列を指定すると，マッチ対象のタグ名がグループ名に使われる。
+# したがって，すべての マッチ種別を別々に表示させたいなら以下のようにする
+zstyle ":completion:*" group-name "" 
+zstyle ":completion:*" use-cache true # apt-getとかdpkgコマンドをキャッシュを使って速くする
+
+###############################################
+##  command's history function                #
+###############################################
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt hist_ignore_dups     # ignore duplication command history list
+setopt share_history        # share command history data
+autoload history-search-end # history search
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
+
+###############################################
 ## export                                     #
 ###############################################
 export EDITOR="emacs"
@@ -79,6 +115,45 @@ case ${OSTYPE} in
 	   export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/lib:$LD_LIBRARY_PATH
         ;;
 esac
+
+###############################################
+## alias                                      #
+###############################################
+alias emacs="emacs -nw"
+alias gls="gls --color"
+alias jitac="java -jar ~/bin/jitac-0.2.0.jar"
+alias ll="ls -ltr"
+alias sshx="ssh -Y"
+alias sc="screen -D -RR"
+case ${OSTYPE} in
+    darwin*)
+	   alias ls="ls -G"
+	   alias Emacs="open -a '/Applications/Emacs.app/Contents/MacOS/Emacs'"
+	   alias excel="open -a Microsoft\ Excel"
+	   alias pwp="open -a Microsoft\ PowerPoint"
+	   alias word="open -a Microsoft\ Word"
+	   alias adobe="open -a Adobe\ Reader"
+	   alias preview="open -a preview"
+	   alias pycat="/usr/local/share/python/pygmentize"
+        ;;
+    linux*)
+	   alias ls="ls --color"
+	   alias pycat="pygmentize"
+        ;;
+esac
+
+###############################################
+##  screen                                    #
+###############################################
+if [ ${TERM} = xterm-color ]; then # status bar
+preexec () {
+  [ ${STY} ] && echo -ne "\ek${1%% *}\e\\"
+}
+precmd() {
+    [ ${STY} ] && echo -ne "\ek$shelltitle\e\\"
+}
+fi
+#[ ${STY} ] || screen -rx || screen -D -RR
 
 ###############################################
 ## ssh-keygen                                 #
@@ -117,81 +192,6 @@ if [ "$PS1" ]; then # only Interactive mode
 fi
 ;;
 esac
-
-###############################################
-##  screen                                    #
-###############################################
-if [ ${TERM} = xterm-color ]; then # status bar
-preexec () {
-  [ ${STY} ] && echo -ne "\ek${1%% *}\e\\"
-}
-precmd() {
-    [ ${STY} ] && echo -ne "\ek$shelltitle\e\\"
-}
-fi
-#[ ${STY} ] || screen -rx || screen -D -RR
-
-###############################################
-##  command's history function                #
-###############################################
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt hist_ignore_dups     # ignore duplication command history list
-setopt share_history        # share command history data
-autoload history-search-end # history search
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
-
-###############################################
-## alias                                      #
-###############################################
-alias emacs="emacs -nw"
-alias gls="gls --color"
-alias jitac="java -jar ~/bin/jitac-0.2.0.jar"
-alias ll="ls -ltr"
-alias sshx="ssh -Y"
-alias sc="screen -D -RR"
-case ${OSTYPE} in
-    darwin*)
-	   alias ls="ls -G"
-	   alias Emacs="open -a '/Applications/Emacs.app/Contents/MacOS/Emacs'"
-	   alias excel="open -a Microsoft\ Excel"
-	   alias pwp="open -a Microsoft\ PowerPoint"
-	   alias word="open -a Microsoft\ Word"
-	   alias adobe="open -a Adobe\ Reader"
-	   alias preview="open -a preview"
-	   alias pycat="/usr/local/share/python/pygmentize"
-        ;;
-    linux*)
-	   alias ls="ls --color"
-	   alias pycat="pygmentize"
-        ;;
-esac
-
-###############################################
-# zstyle                                      #
-###############################################
-zstyle ":completion:*" list-colors "di=34" "ln=35" "so=32" "ex=31" "bd=46;34" "cd=43;34"
-zstyle ":completion:*:default" menu select=1                        # 補完候補をカーソルで選択できる
-zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"                 # 補完時に大文字小文字を区別しない
-zstyle ":completion:*:*files" ignored-patterns "*?.o"               # オブジェクトファイルとか中間ファイルとかはfileとして補完させない
-zstyle ":completion:*" list-separator "-->"                         # セパレータを設定する
-zstyle ":completion:*:*:-subscript-:*" tag-order indexes parameters # 変数の添字を補完する
-# 補完関数の表示を過剰にする
-zstyle ":completion:*" verbose yes 
-zstyle ":completion:*" completer _expand _complete _match _prefix _approximate _list _history 
-zstyle ":completion:*:messages" format $YELLOW"%d"$DEFAULT
-zstyle ":completion:*:warnings" format $RED"No matches for:"$YELLOW" %d"$DEFAULT
-zstyle ":completion:*:descriptions" format $YELLOW"completing %B%d%b"$DEFAULT
-zstyle ":completion:*:corrections" format $YELLOW"%B%d "$RED"(errors: %e)%b"$DEFAULT
-zstyle ":completion:*:options" description "yes"
-# グループ名に空文字列を指定すると，マッチ対象のタグ名がグループ名に使われる。
-# したがって，すべての マッチ種別を別々に表示させたいなら以下のようにする
-zstyle ":completion:*" group-name "" 
-zstyle ":completion:*" use-cache true # apt-getとかdpkgコマンドをキャッシュを使って速くする
 
 ###############################################
 ## google search (Japanese is available)      #
