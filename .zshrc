@@ -64,7 +64,7 @@ setopt no_beep             # ビープ音を鳴らさないようにする
 bindkey "^I" menu-complete # 展開する前に補完候補を出させる(Ctrl-iで補完するようにする)
 
 ###############################################
-# zstyle                                      #
+## zstyle                                     #
 ###############################################
 zstyle ":completion:*" list-colors "di=34" "ln=35" "so=32" "ex=31" "bd=46;34" "cd=43;34"
 zstyle ":completion:*:default" menu select=1                        # 補完候補をカーソルで選択できる
