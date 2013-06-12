@@ -112,7 +112,7 @@ case ${OSTYPE} in
         ;;
     linux*)
 	   export PATH=/home/share/cad/mipsel4/usr/bin:/usr/local/bin:${HOME}/bin:/usr/local/cuda/bin:$PATH
-	   export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/lib:$LD_LIBRARY_PATH
+	   export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/lib:${HOME}/pin2.11/intel64/runtime:${HOME}/snappy/lib:$LD_LIBRARY_PATH
         ;;
 esac
 
