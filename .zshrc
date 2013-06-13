@@ -41,6 +41,17 @@ SPROMPT=$tmp_sprompt  # スペル訂正用プロンプト
 RPROMPT=$tmp_rprompt  # 右側のプロンプト
 
 ###############################################
+## source zsh-syntax-highlighting             #
+###############################################
+case ${OSTYPE} in
+    darwin*)
+	   if [ -f /usr/local/Cellar/zsh-syntax-highlighting/0.1.3/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+		  source /usr/local/Cellar/zsh-syntax-highlighting/0.1.3/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	   fi
+        ;;
+esac
+
+###############################################
 ## completion                                 #
 ###############################################
 autoload -U compinit
