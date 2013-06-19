@@ -49,6 +49,11 @@ case ${OSTYPE} in
 		  source /usr/local/Cellar/zsh-syntax-highlighting/0.1.3/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	   fi
         ;;
+    linux*)
+	   if [ -f ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+		  source ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	   fi
+        ;;
 esac
 
 ###############################################
