@@ -77,6 +77,7 @@ unsetopt caseglob          # ファイルグロブで大文字小文字
 setopt auto_param_slash    # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
 setopt mark_dirs           # ファイル名の展開でディレクトリにマッチした場合 末尾に / を付加
 setopt no_beep             # ビープ音を鳴らさないようにする
+setopt transient_rprompt   # 現在の行のみにRPROMPTを表示させる
 bindkey "^I" menu-complete # 展開する前に補完候補を出させる(Ctrl-iで補完するようにする)
 
 ###############################################
