@@ -59,7 +59,14 @@ esac
 ###############################################
 ## completion                                 #
 ###############################################
-fpath=(/usr/local/share/zsh-completions $fpath)
+case ${OSTYPE} in
+    darwin*)
+	   fpath=(/usr/local/share/zsh-completions $fpath)
+        ;;
+    linux*)
+	   fpath=(${HOME}/.zsh/zsh-completions $fpath)
+        ;;
+esac
 autoload -U compinit
 compinit
 setopt auto_cd             # ディレクトリ名を入力するだけでカレントディレクトリを変更
