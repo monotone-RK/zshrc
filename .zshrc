@@ -59,6 +59,7 @@ esac
 ###############################################
 ## completion                                 #
 ###############################################
+fpath=(/usr/local/share/zsh-completions $fpath)
 autoload -U compinit
 compinit
 setopt auto_cd             # ディレクトリ名を入力するだけでカレントディレクトリを変更
