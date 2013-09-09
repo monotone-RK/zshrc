@@ -129,7 +129,6 @@ bindkey "^N" history-beginning-search-forward-end
 ###############################################
 export EDITOR="emacs"
 export LANG=ja_JP.UTF-8
-export LSCOLORS=gxfxcxdxbxegedabagacad
 export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30" 
 case ${OSTYPE} in
     darwin*)
@@ -152,7 +151,14 @@ alias sshx="ssh -Y"
 alias sc="screen -D -RR"
 case ${OSTYPE} in
     darwin*)
-	   alias ls="ls -G"
+	   if [ -d /usr/local/opt/coreutils/libexec/gnubin ]; then
+	     export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+		export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+		alias ls='ls --color=auto'
+	   else
+		export LSCOLORS=gxfxcxdxbxegedabagacad
+		alias ls='ls -G'
+	   fi
 	   alias Emacs="open -a '/Applications/Emacs.app/Contents/MacOS/Emacs'"
 	   alias excel="open -a Microsoft\ Excel"
 	   alias pwp="open -a Microsoft\ PowerPoint"
