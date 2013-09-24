@@ -45,8 +45,8 @@ RPROMPT=$tmp_rprompt  # 右側のプロンプト
 ###############################################
 case ${OSTYPE} in
     darwin*)
-	   if [ -f /usr/local/Cellar/zsh-syntax-highlighting/0.1.3/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-		  source /usr/local/Cellar/zsh-syntax-highlighting/0.1.3/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	   if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+		  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	   fi
         ;;
     linux*)
