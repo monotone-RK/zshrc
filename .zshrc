@@ -49,7 +49,7 @@ case ${OSTYPE} in
 		  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	   fi
         ;;
-    linux*)
+    *)
 	   if [ -f ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
 		  source ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	   fi
@@ -63,7 +63,7 @@ case ${OSTYPE} in
     darwin*)
 	   fpath=(/usr/local/share/zsh-completions $fpath)
         ;;
-    linux*)
+    *)
 	   fpath=(${HOME}/.zsh/zsh-completions $fpath)
         ;;
 esac
@@ -170,6 +170,9 @@ case ${OSTYPE} in
     linux*)
 	   alias ls="ls --color"
 	   alias pycat="pygmentize"
+        ;;
+    cygwin*)
+	   alias ls="ls --color"
         ;;
 esac
 
