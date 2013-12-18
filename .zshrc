@@ -244,6 +244,14 @@ function google() {
 }
 
 ###############################################
+## ANTLR                                      #
+###############################################
+if [ -d /usr/local/lib/antlr-3.5.1-complete.jar ]; then
+    export CLASSPATH=/usr/local/lib/antlr-3.5.1-complete.jar:$CLASSPATH
+    alias antlr3="java -jar /usr/local/lib/antlr-3.5.1-complete.jar"
+fi
+
+###############################################
 ## display "username@host:current directory"  #
 ## on title of the terminal                   #
 ###############################################
