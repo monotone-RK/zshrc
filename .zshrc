@@ -252,6 +252,13 @@ if [ -d /usr/local/lib/antlr-3.5.1-complete.jar ]; then
 fi
 
 ###############################################
+## VCS                                        #
+###############################################
+if [ -f /eda/cad.bashrc ]; then
+    source /eda/cad.bashrc
+fi
+
+###############################################
 ## display "username@host:current directory"  #
 ## on title of the terminal                   #
 ###############################################
