@@ -135,8 +135,8 @@ case ${OSTYPE} in
 	   export PATH=${HOME}/bin:/usr/local/bin:/usr/texbin:/opt/ImageMagick/bin:$PATH
         ;;
     linux*)
-	   export PATH=/home/share/cad/mipsel4/usr/bin:/usr/local/bin:${HOME}/bin:/usr/local/cuda/bin:$PATH
-	   export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/lib:${HOME}/pin2.11/intel64/runtime:${HOME}/snappy/lib:$LD_LIBRARY_PATH
+	   export PATH=/home/share/cad/mipsel4/usr/bin:/usr/local/bin:${HOME}/bin:/usr/local/cuda/bin:/usr/local/llvm/bin:$PATH
+	   export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/lib:${HOME}/pin2.11/intel64/runtime:${HOME}/snappy/lib:/usr/local/lib:$LD_LIBRARY_PATH
         ;;
 esac
 
