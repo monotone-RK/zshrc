@@ -165,6 +165,7 @@ case ${OSTYPE} in
 	   alias word="open -a Microsoft\ Word"
 	   alias adobe="open -a Adobe\ Reader"
 	   alias preview="open -a preview"
+	   alias arduino="open -a Arduino"
 	   alias pycat="/usr/local/share/python/pygmentize"
         ;;
     linux*)
