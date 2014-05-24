@@ -143,7 +143,7 @@ esac
 ###############################################
 ## alias                                      #
 ###############################################
-alias emacs="emacs -nw"
+alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
 alias gls="gls --color"
 alias jitac="java -jar ~/bin/jitac-0.2.0.jar"
 alias ll="ls -ltr"
@@ -159,7 +159,7 @@ case ${OSTYPE} in
 		export LSCOLORS=gxfxcxdxbxegedabagacad
 		alias ls='ls -G'
 	   fi
-	   alias Emacs="open -a '/Applications/Emacs.app/Contents/MacOS/Emacs'"
+	   alias Emacs="open -a /Applications/Emacs.app/Contents/MacOS/Emacs"
 	   alias excel="open -a Microsoft\ Excel"
 	   alias pwp="open -a Microsoft\ PowerPoint"
 	   alias word="open -a Microsoft\ Word"
