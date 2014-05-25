@@ -149,6 +149,7 @@ alias jitac="java -jar ~/bin/jitac-0.2.0.jar"
 alias ll="ls -ltr"
 alias sshx="ssh -Y"
 alias sc="screen -D -RR"
+alias pycat="pygmentize"
 case ${OSTYPE} in
     darwin*)
 	   if [ -d /usr/local/opt/coreutils/libexec/gnubin ]; then
@@ -166,11 +167,9 @@ case ${OSTYPE} in
 	   alias adobe="open -a Adobe\ Reader"
 	   alias preview="open -a preview"
 	   alias arduino="open -a Arduino"
-	   alias pycat="/usr/local/share/python/pygmentize"
         ;;
     linux*)
 	   alias ls="ls --color"
-	   alias pycat="pygmentize"
         ;;
     cygwin*)
 	   alias ls="ls --color"
