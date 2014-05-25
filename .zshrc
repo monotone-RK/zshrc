@@ -174,6 +174,7 @@ case ${OSTYPE} in
         ;;
     cygwin*)
 	   alias emacs="emacs -nw"
+	   alias Emacs="/cygdrive/c/emacs/bin/runemacs"
 	   alias ls="ls --color"
         ;;
 esac
