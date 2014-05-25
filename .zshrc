@@ -149,6 +149,7 @@ alias ll="ls -ltr"
 alias sshx="ssh -Y"
 alias sc="screen -D -RR"
 alias pycat="pygmentize"
+alias emacs="emacs -nw"
 case ${OSTYPE} in
     darwin*)
 	   if [ -d /usr/local/opt/coreutils/libexec/gnubin ]; then
@@ -159,7 +160,6 @@ case ${OSTYPE} in
 		export LSCOLORS=gxfxcxdxbxegedabagacad
 		alias ls='ls -G'
 	   fi
-	   alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
 	   alias Emacs="open -a /Applications/Emacs.app/Contents/MacOS/Emacs"
 	   alias excel="open -a Microsoft\ Excel"
 	   alias pwp="open -a Microsoft\ PowerPoint"
@@ -169,13 +169,11 @@ case ${OSTYPE} in
 	   alias arduino="open -a Arduino"
         ;;
     linux*)
-	   alias emacs="emacs -nw"
 	   alias ls="ls --color"
         ;;
     cygwin*)
-	   alias emacs="emacs -nw"
-	   alias Emacs="/cygdrive/c/emacs/bin/runemacs"
 	   alias ls="ls --color"
+	   alias Emacs="/cygdrive/c/emacs/bin/runemacs"
         ;;
 esac
 
