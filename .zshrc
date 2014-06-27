@@ -150,15 +150,27 @@ alias sshx="ssh -Y"
 alias sc="screen -D -RR"
 alias pycat="pygmentize"
 alias emacs="emacs -nw"
+alias grep="grep --color=always"
+alias egrep="egrep --color=always"
+alias fgrep="fgrep --color=always"
+alias zgrep="zgrep --color=always"
+alias pdfgrep="pdfgrep --color=always"
 case ${OSTYPE} in
     darwin*)
 	   if [ -d /usr/local/opt/coreutils/libexec/gnubin ]; then
 	     export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 		export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
-		alias ls='ls --color=auto'
+		alias ls="ls --color"
 	   else
 		export LSCOLORS=gxfxcxdxbxegedabagacad
-		alias ls='ls -G'
+		alias ls="ls -G"
+	   fi
+	   if [ -d /usr/local/opt/gnu-sed/libexec/gnubin ]; then
+          export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
+		export MANPATH=/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH
+	   fi
+	   if [ -d /usr/local/opt/gnu-tar/libexec/gnubin ]; then
+          export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
 	   fi
 	   alias Emacs="open -a /Applications/Emacs.app/Contents/MacOS/Emacs"
 	   alias excel="open -a Microsoft\ Excel"
