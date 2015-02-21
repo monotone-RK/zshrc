@@ -29,10 +29,10 @@ tmp_rprompt="%{${fg[cyan]}%}[%~]%{${reset_color}%}"
 # rootユーザ時(太字にし、アンダーバーをつける)
 case ${UID} in
     0)
-	   tmp_prompt="%B%U${tmp_prompt}%u%b"
-	   tmp_prompt2="%B%U${tmp_prompt2}%u%b"
-	   tmp_sprompt="%B%U${tmp_sprompt}%u%b"
-	   tmp_rprompt="%B%U${tmp_rprompt}%u%b"
+	tmp_prompt="%B%U${tmp_prompt}%u%b"
+	tmp_prompt2="%B%U${tmp_prompt2}%u%b"
+	tmp_sprompt="%B%U${tmp_sprompt}%u%b"
+	tmp_rprompt="%B%U${tmp_rprompt}%u%b"
         ;;
 esac
 PROMPT=$tmp_prompt    # 通常のプロンプト
@@ -45,14 +45,14 @@ RPROMPT=$tmp_rprompt  # 右側のプロンプト
 ###############################################
 case ${OSTYPE} in
     darwin*)
-	   if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-		  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-	   fi
+	if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+	    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	fi
         ;;
     *)
-	   if [ -f ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-		  source ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-	   fi
+	if [ -f ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+	    source ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	fi
         ;;
 esac
 
@@ -61,10 +61,10 @@ esac
 ###############################################
 case ${OSTYPE} in
     darwin*)
-	   fpath=(/usr/local/share/zsh-completions $fpath)
+	fpath=(/usr/local/share/zsh-completions $fpath)
         ;;
     *)
-	   fpath=(${HOME}/.zsh/zsh-completions $fpath)
+	fpath=(${HOME}/.zsh/zsh-completions $fpath)
         ;;
 esac
 autoload -U compinit
@@ -132,13 +132,19 @@ export LANG=ja_JP.UTF-8
 export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30" 
 case ${OSTYPE} in
     darwin*)
-	   export PATH=${HOME}/bin:/usr/local/bin:/usr/texbin:/opt/ImageMagick/bin:$PATH
+	export PATH=${HOME}/bin:/usr/local/bin:/usr/local/sbin:/usr/texbin:/opt/ImageMagick/bin:$PATH
         ;;
     linux*)
-	   export PATH=/home/share/cad/mipsel4/usr/bin:/usr/local/bin:${HOME}/bin:/usr/local/cuda/bin:/usr/local/llvm/bin:$PATH
-	   export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/lib:${HOME}/pin2.11/intel64/runtime:${HOME}/snappy/lib:/usr/local/lib:$LD_LIBRARY_PATH
+	export PATH=/home/share/cad/mipsel4/usr/bin:/usr/local/bin:${HOME}/bin:/usr/local/cuda/bin:/usr/local/llvm/bin:$PATH
+	export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/lib:${HOME}/pin2.11/intel64/runtime:${HOME}/snappy/lib:/usr/local/lib:$LD_LIBRARY_PATH
         ;;
 esac
+
+if [ -x "`which go`" ]; then
+    export GOROOT=`go env GOROOT`
+    export GOPATH=~/.go
+    export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+fi
 
 ###############################################
 ## alias                                      #
@@ -157,35 +163,35 @@ alias zgrep="zgrep --color=always"
 alias pdfgrep="pdfgrep --color=always"
 case ${OSTYPE} in
     darwin*)
-	   if [ -d /usr/local/opt/coreutils/libexec/gnubin ]; then
-	     export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-		export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
-		alias ls="ls --color"
-	   else
-		export LSCOLORS=gxfxcxdxbxegedabagacad
-		alias ls="ls -G"
-	   fi
-	   if [ -d /usr/local/opt/gnu-sed/libexec/gnubin ]; then
-          export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
-		export MANPATH=/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH
-	   fi
-	   if [ -d /usr/local/opt/gnu-tar/libexec/gnubin ]; then
-          export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
-	   fi
-	   alias Emacs="open -a /Applications/Emacs.app/Contents/MacOS/Emacs"
-	   alias excel="open -a Microsoft\ Excel"
-	   alias pwp="open -a Microsoft\ PowerPoint"
-	   alias word="open -a Microsoft\ Word"
-	   alias adobe="open -a Adobe\ Reader"
-	   alias preview="open -a preview"
-	   alias arduino="open -a Arduino"
+	if [ -d /usr/local/opt/coreutils/libexec/gnubin ]; then
+	    export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+	    export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+	    alias ls="ls --color"
+	else
+	    export LSCOLORS=gxfxcxdxbxegedabagacad
+	    alias ls="ls -G"
+	fi
+	if [ -d /usr/local/opt/gnu-sed/libexec/gnubin ]; then
+	    export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
+	    export MANPATH=/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH
+	fi
+	if [ -d /usr/local/opt/gnu-tar/libexec/gnubin ]; then
+	    export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
+	fi
+	alias Emacs="open -a /Applications/Emacs.app/Contents/MacOS/Emacs"
+	alias excel="open -a Microsoft\ Excel"
+	alias pwp="open -a Microsoft\ PowerPoint"
+	alias word="open -a Microsoft\ Word"
+	alias adobe="open -a Adobe\ Reader"
+	alias preview="open -a preview"
+	alias arduino="open -a Arduino"
         ;;
     linux*)
-	   alias ls="ls --color"
+	alias ls="ls --color"
         ;;
     cygwin*)
-	   alias ls="ls --color"
-	   alias Emacs="/cygdrive/c/emacs/bin/runemacs"
+	alias ls="ls --color"
+	alias Emacs="/cygdrive/c/emacs/bin/runemacs"
         ;;
 esac
 
@@ -193,76 +199,65 @@ esac
 ## screen                                     #
 ###############################################
 if [ ${TERM} = xterm-color ]; then # status bar
-preexec () {
-  [ ${STY} ] && echo -ne "\ek${1%% *}\e\\"
-}
-precmd() {
-    [ ${STY} ] && echo -ne "\ek$shelltitle\e\\"
-}
+    preexec () {
+	[ ${STY} ] && echo -ne "\ek${1%% *}\e\\"
+    }
+    precmd() {
+	[ ${STY} ] && echo -ne "\ek$shelltitle\e\\"
+    }
 fi
-#[ ${STY} ] || screen -rx || screen -D -RR
 
 ###############################################
 ## ssh-keygen                                 #
 ###############################################
 case ${OSTYPE} in
     linux*) # linux only
-HOST=`hostname`
-HOST_NAME=`echo ${HOST} | sed 's/\..*//'`
-if [ "$PS1" ]; then # only Interactive mode
-    # ssh-agent
-    SSH_AGENT_FILE="${HOME}/.ssh/.ssh-agent.`hostname`"
-    if [ -f ${SSH_AGENT_FILE} ]; then
-        eval `cat ${SSH_AGENT_FILE}`
-        ssh_agent_exist=0    
-        for id in `ps ax|grep 'ssh-agent'|sed -e 's/\([0-9]\+\).*/\1/'`
-        do 
-            if [ ${SSH_AGENT_PID} = ${id} ]
-            then 
-                ssh_agent_exist=1
-            fi
-        done
-        if [ $ssh_agent_exist = 0 ]
-        then
-            rm -f ${SSH_AGENT_FILE}
-            ssh-agent > ${SSH_AGENT_FILE}
-            chmod 600 ${SSH_AGENT_FILE}
-            eval `cat ${SSH_AGENT_FILE}`
-            ssh-add
-        fi
-    else
-        ssh-agent > ${SSH_AGENT_FILE}
-        chmod 600 ${SSH_AGENT_FILE}
-        eval `cat ${SSH_AGENT_FILE}`
-        ssh-add
-    fi
-fi
-;;
+	HOST=`hostname`
+	HOST_NAME=`echo ${HOST} | sed 's/\..*//'`
+	if [ "$PS1" ]; then # only Interactive mode
+	    # ssh-agent
+	    SSH_AGENT_FILE="${HOME}/.ssh/.ssh-agent.`hostname`"
+	    if [ -f ${SSH_AGENT_FILE} ]; then
+		eval `cat ${SSH_AGENT_FILE}`
+		ssh_agent_exist=0    
+		for id in `ps ax|grep 'ssh-agent'|sed -e 's/\([0-9]\+\).*/\1/'`
+		do 
+		    if [ ${SSH_AGENT_PID} = ${id} ]; then 
+			ssh_agent_exist=1
+		    fi
+		done
+		if [ $ssh_agent_exist = 0 ]; then
+		    rm -f ${SSH_AGENT_FILE}
+		    ssh-agent > ${SSH_AGENT_FILE}
+		    chmod 600 ${SSH_AGENT_FILE}
+		    eval `cat ${SSH_AGENT_FILE}`
+		    ssh-add
+		fi
+	    else
+		ssh-agent > ${SSH_AGENT_FILE}
+		chmod 600 ${SSH_AGENT_FILE}
+		eval `cat ${SSH_AGENT_FILE}`
+		ssh-add
+	    fi
+	fi
+	;;
 esac
 
 ###############################################
 ## google search (Japanese is available)      #
 ###############################################
 function google() {
-  local str opt
-  if [ $# != 0 ]; then # 引数が存在すれば
-    for i in $*; do
-      str="$str+$i"
-    done
-    str=`echo $str | sed 's/^\+//'` # 先頭の「+」を削除
-    opt="search?num=50&hl=ja&ie=euc-jp&oe=euc-jp&lr=lang_ja"
-    opt="${opt}&q=${str}"
-  fi
-  w3m http://www.google.co.jp/$opt # 引数がなければ $opt は空
+    local str opt
+    if [ $# != 0 ]; then # 引数が存在すれば
+	for i in $*; do
+	    str="$str+$i"
+	done
+	str=`echo $str | sed 's/^\+//'` # 先頭の「+」を削除
+	opt="search?num=50&hl=ja&ie=euc-jp&oe=euc-jp&lr=lang_ja"
+	opt="${opt}&q=${str}"
+    fi
+    w3m http://www.google.co.jp/$opt # 引数がなければ $opt は空
 }
-
-###############################################
-## ANTLR                                      #
-###############################################
-if [ -d /usr/local/lib/antlr-3.5.1-complete.jar ]; then
-    export CLASSPATH=/usr/local/lib/antlr-3.5.1-complete.jar:$CLASSPATH
-    alias antlr3="java -jar /usr/local/lib/antlr-3.5.1-complete.jar"
-fi
 
 ###############################################
 ## VCS                                        #
@@ -270,16 +265,3 @@ fi
 if [ -f /eda/cad.bashrc ]; then
     source /eda/cad.bashrc
 fi
-
-###############################################
-## display "username@host:current directory"  #
-## on title of the terminal                   #
-###############################################
-# case "${TERM}" in
-# kterm*|xterm)
-#     precmd() {
-#         echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
-#     }
-#     ;;
-# esac
-
