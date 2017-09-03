@@ -179,10 +179,10 @@ case ${OSTYPE} in
 	    export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
 	fi
 	alias Emacs="open -a /Applications/Emacs.app/Contents/MacOS/Emacs"
-	alias excel="open -a Microsoft\ Excel"
-	alias pwp="open -a Microsoft\ PowerPoint"
-	alias word="open -a Microsoft\ Word"
-	alias adobe="open -a Adobe\ Reader"
+	function excel() { open -a Microsoft\ Excel $1 }  # alias excel="open -a Microsoft\ Excel"
+	function pwp() { open -a Microsoft\ PowerPoint $1 }  # alias pwp="open -a Microsoft\ PowerPoint"
+	function word() { open -a Microsoft\ Word $1 }  # alias word="open -a Microsoft\ Word"
+	alias adobe="open -a Adobe\ Acrobat\ Reader\ DC"
 	alias preview="open -a preview"
 	alias arduino="open -a Arduino"
         ;;
