@@ -149,6 +149,7 @@ fi
 ###############################################
 ## alias                                      #
 ###############################################
+alias diff="colordiff"
 alias gls="gls --color"
 alias jitac="java -jar ~/bin/jitac-0.2.0.jar"
 alias ll="ls -ltr"
