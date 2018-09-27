@@ -266,3 +266,12 @@ function google() {
 if [ -f /eda/cad.bashrc ]; then
     source /eda/cad.bashrc
 fi
+
+###############################################
+## VNC Viewer                                 #
+###############################################
+FPGA=localhost:5901
+PPX=localhost:5902
+
+alias vfpga="vncviewer ${FPGA} &"
+alias vppx="vncviewer ${PPX} &"
