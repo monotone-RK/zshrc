@@ -156,7 +156,8 @@ alias ll="ls -ltr"
 alias sshx="ssh -Y"
 alias sc="screen -D -RR"
 alias pycat="pygmentize"
-alias emacs="emacs -nw"
+alias emacs='emacsclient -nw -a ""'
+alias ekill='emacsclient -e "(kill-emacs)"'
 alias grep="grep --color=always"
 alias egrep="egrep --color=always"
 alias fgrep="fgrep --color=always"
