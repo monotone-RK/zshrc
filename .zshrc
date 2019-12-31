@@ -1,6 +1,6 @@
 #******************************************************************************/
 # .zshrc (config file for zsh)                                      monotone-RK/
-#                                                       Last updated 2013.06.09/
+#                                                       Last updated 2020.01.01/
 #******************************************************************************/
 
 ###############################################
@@ -26,7 +26,7 @@ tmp_prompt="%{${fg[cyan]}%}[%n@%m] %(!.#.$) %{${reset_color}%}"
 tmp_prompt2="%{${fg[cyan]}%}%_> %{${reset_color}%}"
 tmp_sprompt="%{${fg[red]}%}correct: %R -> %r [nyae]? %{${reset_color}%}"
 tmp_rprompt="%{${fg[cyan]}%}[%~]%{${reset_color}%}"
-# rootユーザ時(太字にし、アンダーバーをつける)
+# root mode
 case ${UID} in
     0)
 	tmp_prompt="%B%U${tmp_prompt}%u%b"
@@ -35,10 +35,10 @@ case ${UID} in
 	tmp_rprompt="%B%U${tmp_rprompt}%u%b"
         ;;
 esac
-PROMPT=$tmp_prompt    # 通常のプロンプト
-PROMPT2=$tmp_prompt2  # セカンダリのプロンプト(コマンドが2行以上の時に表示される)
-SPROMPT=$tmp_sprompt  # スペル訂正用プロンプト
-RPROMPT=$tmp_rprompt  # 右側のプロンプト
+PROMPT=$tmp_prompt    # normal prompt
+PROMPT2=$tmp_prompt2  # secondary prompt
+SPROMPT=$tmp_sprompt  # a prompt for spell correction
+RPROMPT=$tmp_rprompt  # right-side prompt
 
 ###############################################
 ## source zsh-syntax-highlighting             #
@@ -69,35 +69,35 @@ case ${OSTYPE} in
 esac
 autoload -U compinit
 compinit
-setopt auto_cd             # ディレクトリ名を入力するだけでカレントディレクトリを変更
-setopt auto_pushd          # 移動したディレクトリを記録
-setopt correct             # 入力したコマンド名が間違っている場合には修正
-setopt auto_menu           # タブキー連打で補完候補を順に表示
-setopt list_packed         # 補完候補を詰めて表示
-setopt list_types          # 補完候補一覧でファイルの種別を識別マーク表示(ls -F の記号)
-setopt print_eight_bit     # 補完候補リストの日本語を正しく表示
-setopt nolistbeep          # ベルを鳴らさない。
-setopt noautoremoveslash   # パスの最後に付くスラッシュ(/)を自動的に削除させない
-setopt pushd_ignore_dups   # auto_pushdで重複するディレクトリは記録しないようにする
-setopt magic_equal_subst   # コマンドラインの引数で --prefix=/usr などの = 以降でも補完できる
-setopt extended_glob       # グロブ機能を拡張する
-unsetopt caseglob          # ファイルグロブで大文字小文字を区別しない
-setopt auto_param_slash    # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
-setopt mark_dirs           # ファイル名の展開でディレクトリにマッチした場合 末尾に / を付加
-setopt no_beep             # ビープ音を鳴らさないようにする
-setopt transient_rprompt   # 現在の行のみにRPROMPTを表示させる
-bindkey "^I" menu-complete # 展開する前に補完候補を出させる(Ctrl-iで補完するようにする)
+setopt auto_cd
+setopt auto_pushd
+setopt correct
+setopt auto_menu
+setopt list_packed
+setopt list_types
+setopt print_eight_bit
+setopt nolistbeep
+setopt noautoremoveslash
+setopt pushd_ignore_dups
+setopt magic_equal_subst
+setopt extended_glob
+unsetopt caseglob
+setopt auto_param_slash
+setopt mark_dirs
+setopt no_beep
+setopt transient_rprompt
+bindkey "^I" menu-complete
 
 ###############################################
 ## zstyle                                     #
 ###############################################
 zstyle ":completion:*" list-colors "di=34" "ln=35" "so=32" "ex=31" "bd=46;34" "cd=43;34"
-zstyle ":completion:*:default" menu select=1                        # 補完候補をカーソルで選択できる
-zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"                 # 補完時に大文字小文字を区別しない
-zstyle ":completion:*:*files" ignored-patterns "*?.o"               # オブジェクトファイルとか中間ファイルとかはfileとして補完させない
-zstyle ":completion:*" list-separator "-->"                         # セパレータを設定する
-zstyle ":completion:*:*:-subscript-:*" tag-order indexes parameters # 変数の添字を補完する
-# 補完関数の表示を過剰にする
+zstyle ":completion:*:default" menu select=1
+zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"
+zstyle ":completion:*:*files" ignored-patterns "*?.o"
+zstyle ":completion:*" list-separator "-->"
+zstyle ":completion:*:*:-subscript-:*" tag-order indexes parameters
+# Show completion excessively
 zstyle ":completion:*" verbose yes 
 zstyle ":completion:*" completer _expand _complete _match _prefix _approximate _list _history 
 zstyle ":completion:*:messages" format $YELLOW"%d"$DEFAULT
@@ -105,10 +105,8 @@ zstyle ":completion:*:warnings" format $RED"No matches for:"$YELLOW" %d"$DEFAULT
 zstyle ":completion:*:descriptions" format $YELLOW"completing %B%d%b"$DEFAULT
 zstyle ":completion:*:corrections" format $YELLOW"%B%d "$RED"(errors: %e)%b"$DEFAULT
 zstyle ":completion:*:options" description "yes"
-# グループ名に空文字列を指定すると，マッチ対象のタグ名がグループ名に使われる。
-# したがって，すべての マッチ種別を別々に表示させたいなら以下のようにする
 zstyle ":completion:*" group-name "" 
-zstyle ":completion:*" use-cache true # apt-getとかdpkgコマンドをキャッシュを使って速くする
+zstyle ":completion:*" use-cache true
 
 ###############################################
 ## command's history function                 #
@@ -127,16 +125,19 @@ bindkey "^N" history-beginning-search-forward-end
 ###############################################
 ## export                                     #
 ###############################################
-export EDITOR="emacs"
-export LANG=ja_JP.UTF-8
+export EDITOR="vim"
+export LANG=en_US.UTF-8
 export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30" 
+
+typeset -U PATH
+
+export PATH=${HOME}/bin:/usr/local/bin:$PATH
 case ${OSTYPE} in
     darwin*)
-	export PATH=${HOME}/bin:/usr/local/bin:/usr/local/sbin:/usr/texbin:/opt/ImageMagick/bin:$PATH
+	export PATH=/usr/local/sbin:/usr/texbin:/opt/ImageMagick/bin:$PATH
         ;;
     linux*)
-	export PATH=/home/share/cad/mipsel4/usr/bin:/usr/local/bin:${HOME}/bin:/usr/local/cuda/bin:/usr/local/llvm/bin:$PATH
-	export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/lib:${HOME}/pin2.11/intel64/runtime:${HOME}/snappy/lib:/usr/local/lib:$LD_LIBRARY_PATH
+	export PATH=${HOME}/local/bin:/opt/bin:/opt/local/bin:$PATH
         ;;
 esac
 
@@ -184,21 +185,17 @@ case ${OSTYPE} in
 	fi
 	if [ -d /usr/local/opt/gnu-tar/libexec/gnubin ]; then
 	    export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
+	    export MANPATH=/usr/local/opt/gnu-tar/libexec/gnuman:$MANPATH
 	fi
-	alias Emacs="open -a /Applications/Emacs.app/Contents/MacOS/Emacs"
-	function excel() { open -a Microsoft\ Excel $1 }  # alias excel="open -a Microsoft\ Excel"
-	function pwp() { open -a Microsoft\ PowerPoint $1 }  # alias pwp="open -a Microsoft\ PowerPoint"
-	function word() { open -a Microsoft\ Word $1 }  # alias word="open -a Microsoft\ Word"
+	function excel() { open -a Microsoft\ Excel $1 }
+	function pwp() { open -a Microsoft\ PowerPoint $1 }
+	function word() { open -a Microsoft\ Word $1 }
 	alias adobe="open -a Adobe\ Acrobat\ Reader\ DC"
 	alias preview="open -a preview"
 	alias arduino="open -a Arduino"
         ;;
     linux*)
 	alias ls="ls --color"
-        ;;
-    cygwin*)
-	alias ls="ls --color"
-	alias Emacs="/cygdrive/c/emacs/bin/runemacs"
         ;;
 esac
 
@@ -251,22 +248,6 @@ case ${OSTYPE} in
 esac
 
 ###############################################
-## google search (Japanese is available)      #
-###############################################
-function google() {
-    local str opt
-    if [ $# != 0 ]; then # 引数が存在すれば
-	for i in $*; do
-	    str="$str+$i"
-	done
-	str=`echo $str | sed 's/^\+//'` # 先頭の「+」を削除
-	opt="search?num=50&hl=ja&ie=euc-jp&oe=euc-jp&lr=lang_ja"
-	opt="${opt}&q=${str}"
-    fi
-    w3m http://www.google.co.jp/$opt # 引数がなければ $opt は空
-}
-
-###############################################
 ## VCS                                        #
 ###############################################
 if [ -f /eda/cad.bashrc ]; then
@@ -281,3 +262,18 @@ PPX=localhost:5902
 
 alias vfpga="vncviewer ${FPGA} &"
 alias vppx="vncviewer ${PPX} &"
+
+###############################################
+## Utility                                    #
+###############################################
+function add_path() {
+    if [[ -e "$1" ]]; then
+        export PATH="$(readlink -f "$1"):$PATH"
+    fi
+}
+
+function add_ldpath() {
+    if [[ -e "$1" ]]; then
+        export LD_LIBRARY_PATH="$(readlink -f "$1"):$LD_LIBRARY_PATH"
+    fi
+}
