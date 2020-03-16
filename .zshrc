@@ -125,7 +125,6 @@ bindkey "^N" history-beginning-search-forward-end
 ###############################################
 ## export                                     #
 ###############################################
-export EDITOR="vim"
 export LANG=en_US.UTF-8
 export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30" 
 
@@ -135,9 +134,11 @@ export PATH=${HOME}/bin:/usr/local/bin:$PATH
 case ${OSTYPE} in
     darwin*)
 	export PATH=/usr/local/sbin:/usr/texbin:/opt/ImageMagick/bin:$PATH
+	export EDITOR="vim"
         ;;
     linux*)
 	export PATH=${HOME}/local/bin:/opt/bin:/opt/local/bin:$PATH
+	export MODULEPATH=$HOME/modules:$MODULEPATH
         ;;
 esac
 
