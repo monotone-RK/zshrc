@@ -138,7 +138,9 @@ case ${OSTYPE} in
         ;;
     linux*)
 	export PATH=${HOME}/local/bin:/opt/bin:/opt/local/bin:$PATH
-	export MODULEPATH=$HOME/modules:$MODULEPATH
+	if [[ -z $TMUX ]]; then
+	    export MODULEPATH=$HOME/modules:$MODULEPATH
+	fi
         ;;
 esac
 
