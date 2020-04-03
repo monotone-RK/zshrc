@@ -159,6 +159,7 @@ fi
 if [[ ! -x `which tree` ]]; then
     alias tree="pwd;find . | sort | sed '1d;s/^\.//;s/\/\([^/]*\)$/|--\1/;s/\/[^/|]*/| /g'"
 fi
+alias less="less -R"
 alias gls="gls --color"
 alias jitac="java -jar ~/bin/jitac-0.2.0.jar"
 alias ll="ls -ltr"
