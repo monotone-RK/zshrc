@@ -48,6 +48,9 @@ case ${OSTYPE} in
 	if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
 	    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	fi
+	if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+	    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	fi
         ;;
     *)
 	if [ -f ${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
@@ -133,7 +136,7 @@ typeset -U PATH
 export PATH=${HOME}/bin:/usr/local/bin:$PATH
 case ${OSTYPE} in
     darwin*)
-	export PATH=/usr/local/sbin:/usr/texbin:/opt/ImageMagick/bin:$PATH
+	export PATH=/opt/homebrew/sbin:/opt/homebrew/bin:/usr/local/sbin:/usr/texbin:/opt/ImageMagick/bin:$PATH
 	export EDITOR="vim"
         ;;
     linux*)
@@ -179,6 +182,10 @@ case ${OSTYPE} in
 	    export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 	    export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
 	    alias ls="ls --color"
+	elif [ -d /opt/homebrew/opt/coreutils/libexec/gnubin ]; then
+	    export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
+	    export MANPATH=/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH
+	    alias ls="ls --color"
 	else
 	    export LSCOLORS=gxfxcxdxbxegedabagacad
 	    alias ls="ls -G"
@@ -186,10 +193,16 @@ case ${OSTYPE} in
 	if [ -d /usr/local/opt/gnu-sed/libexec/gnubin ]; then
 	    export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
 	    export MANPATH=/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH
+	elif [ -d /opt/homebrew/opt/gnu-sed/libexec/gnubin ]; then
+	    export PATH=/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH
+	    export MANPATH=/opt/homebrew/opt/gnu-sed/libexec/gnuman:$MANPATH
 	fi
 	if [ -d /usr/local/opt/gnu-tar/libexec/gnubin ]; then
 	    export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
 	    export MANPATH=/usr/local/opt/gnu-tar/libexec/gnuman:$MANPATH
+	elif [ -d /opt/homebrew/opt/gnu-tar/libexec/gnubin ]; then
+	    export PATH=/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH
+	    export MANPATH=/opt/homebrew/opt/gnu-tar/libexec/gnuman:$MANPATH
 	fi
 	function excel() { open -a Microsoft\ Excel $1 }
 	function pwp() { open -a Microsoft\ PowerPoint $1 }
@@ -197,6 +210,7 @@ case ${OSTYPE} in
 	alias adobe="open -a Adobe\ Acrobat\ Reader\ DC"
 	alias preview="open -a preview"
 	alias arduino="open -a Arduino"
+	alias vscode="open -a Visual\ Studio\ Code"
         ;;
     linux*)
 	alias ls="ls --color"
