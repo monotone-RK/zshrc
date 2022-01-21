@@ -3,6 +3,9 @@
 #                                                       Last updated 2020.01.01/
 #******************************************************************************/
 
+# Enable Ctrl+A to move to the beginning in the VSCode terminal
+bindkey -e
+
 ###############################################
 ## colors                                     #
 ###############################################
@@ -169,8 +172,6 @@ alias ll="ls -ltr"
 alias sshx="ssh -Y"
 alias sc="screen -D -RR"
 alias pycat="pygmentize"
-alias emacs='emacsclient -nw -a ""'
-alias ekill='emacsclient -e "(kill-emacs)"'
 alias grep="grep --color=always"
 alias egrep="egrep --color=always"
 alias fgrep="fgrep --color=always"
@@ -210,7 +211,6 @@ case ${OSTYPE} in
 	alias adobe="open -a Adobe\ Acrobat\ Reader\ DC"
 	alias preview="open -a preview"
 	alias arduino="open -a Arduino"
-	alias vscode="open -a Visual\ Studio\ Code"
         ;;
     linux*)
 	alias ls="ls --color"
