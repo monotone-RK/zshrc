@@ -7,6 +7,17 @@
 bindkey -e
 
 ###############################################
+## iTerm2's tab title                         #
+###############################################
+function precmd() {
+  local usrname=`whoami`
+  local hstname=`hostname | cut -f 1 -d "."`
+  local dirname=`pwd | sed -e "s|$HOME|~|"`
+  echo -ne "\033]2;$usrname@$hstname:$dirname\007"
+  echo -ne "\033]1;$usrname@$hstname:$dirname\007"
+}
+
+###############################################
 ## colors                                     #
 ###############################################
 local GRAY=$'%{\e[1;30m%}'
@@ -104,14 +115,14 @@ zstyle ":completion:*:*files" ignored-patterns "*?.o"
 zstyle ":completion:*" list-separator "-->"
 zstyle ":completion:*:*:-subscript-:*" tag-order indexes parameters
 # Show completion excessively
-zstyle ":completion:*" verbose yes 
-zstyle ":completion:*" completer _expand _complete _match _prefix _approximate _list _history 
+zstyle ":completion:*" verbose yes
+zstyle ":completion:*" completer _expand _complete _match _prefix _approximate _list _history
 zstyle ":completion:*:messages" format $YELLOW"%d"$DEFAULT
 zstyle ":completion:*:warnings" format $RED"No matches for:"$YELLOW" %d"$DEFAULT
 zstyle ":completion:*:descriptions" format $YELLOW"completing %B%d%b"$DEFAULT
 zstyle ":completion:*:corrections" format $YELLOW"%B%d "$RED"(errors: %e)%b"$DEFAULT
 zstyle ":completion:*:options" description "yes"
-zstyle ":completion:*" group-name "" 
+zstyle ":completion:*" group-name ""
 zstyle ":completion:*" use-cache true
 
 ###############################################
@@ -132,7 +143,7 @@ bindkey "^N" history-beginning-search-forward-end
 ## export                                     #
 ###############################################
 export LANG=en_US.UTF-8
-export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30" 
+export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30"
 
 typeset -U PATH
 
@@ -241,10 +252,10 @@ case ${OSTYPE} in
 	    SSH_AGENT_FILE="${HOME}/.ssh/.ssh-agent.`hostname`"
 	    if [ -f ${SSH_AGENT_FILE} ]; then
 		eval `cat ${SSH_AGENT_FILE}`
-		ssh_agent_exist=0    
+		ssh_agent_exist=0
 		for id in `ps ax|grep 'ssh-agent'|sed -e 's/\([0-9]\+\).*/\1/'`
-		do 
-		    if [ ${SSH_AGENT_PID} = ${id} ]; then 
+		do
+		    if [ ${SSH_AGENT_PID} = ${id} ]; then
 			ssh_agent_exist=1
 		    fi
 		done
