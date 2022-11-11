@@ -219,7 +219,7 @@ case ${OSTYPE} in
 	function excel() { open -a Microsoft\ Excel $1 }
 	function pwp() { open -a Microsoft\ PowerPoint $1 }
 	function word() { open -a Microsoft\ Word $1 }
-	alias adobe="open -a Adobe\ Acrobat\ Reader\ DC"
+	alias adobe="open -a Adobe\ Acrobat\ Reader"
 	alias preview="open -a preview"
 	alias arduino="open -a Arduino"
         ;;
