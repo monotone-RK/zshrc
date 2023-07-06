@@ -306,3 +306,4 @@ function add_ldpath() {
         export LD_LIBRARY_PATH="$(readlink -f "$1"):$LD_LIBRARY_PATH"
     fi
 }
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
