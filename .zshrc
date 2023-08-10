@@ -216,9 +216,33 @@ case ${OSTYPE} in
 	    export PATH=/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH
 	    export MANPATH=/opt/homebrew/opt/gnu-tar/libexec/gnuman:$MANPATH
 	fi
-	function excel() { open -a Microsoft\ Excel $1 }
-	function pwp() { open -a Microsoft\ PowerPoint $1 }
-	function word() { open -a Microsoft\ Word $1 }
+	function word() {
+	    if [ "$#" -eq 0 ]; then
+	        open -a  Microsoft\ Word
+	    else
+	        for f in "$@"; do
+	            open -a  Microsoft\ Word "$f"
+	        done
+	    fi
+	}
+	function pwp() {
+	    if [ "$#" -eq 0 ]; then
+	        open -a Microsoft\ PowerPoint
+	    else
+	        for f in "$@"; do
+	            open -a Microsoft\ PowerPoint "$f"
+	        done
+	    fi
+	}
+	function excel() {
+	    if [ "$#" -eq 0 ]; then
+	        open -a Microsoft\ Excel
+	    else
+	        for f in "$@"; do
+	            open -a Microsoft\ Excel "$f"
+	        done
+	    fi
+	}
 	alias adobe="open -a Adobe\ Acrobat\ Reader"
 	alias preview="open -a preview"
 	alias arduino="open -a Arduino"
