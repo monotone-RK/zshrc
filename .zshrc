@@ -93,6 +93,7 @@ setopt auto_menu
 setopt list_packed
 setopt list_types
 setopt print_eight_bit
+setopt nonomatch
 setopt nolistbeep
 setopt noautoremoveslash
 setopt pushd_ignore_dups
